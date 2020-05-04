@@ -3,6 +3,7 @@ package com.hector.cocheshector.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -50,19 +51,33 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener  {
     }
     private fun onRegister() {
         val user = mAuth.currentUser
-        val nombreCompleto = edt_nombreCompleto.text.toString()
+        val nombre = edt_nombreCompleto.text.toString()
         val nick = edt_nick.text.toString()
         val email = edt_email.text.toString()
         val pass1 = edt_password.text.toString()
         val pass2 = edt_password2.text.toString()
 
-        if(nombreCompleto.isEmpty() || nick.isEmpty() || email.isEmpty() || pass1.isEmpty() || pass2.isEmpty()){
+        if(nombre.isEmpty() || nick.isEmpty() || email.isEmpty() || pass1.isEmpty() || pass2.isEmpty()){
             longToast("Todos los campos son necesarios")
         } else {
             if(pass1 == pass2){
                 mAuth.createUserWithEmailAndPassword(email,pass1).addOnCompleteListener {
                     if(it.isSuccessful){
                         //add user
+                        val user = hashMapOf(
+                            "nombre" to nombre,
+                            "nick" to nick,
+                            "email" to email,
+                            "foto" to "null")
+
+                        db.collection("usuarios")
+                            .add(user as Map<String, Any>).addOnCompleteListener {
+                                if(it.isSuccessful){
+                                    Log.d(TAG, "Usuario registrado correctamente")
+                                } else {
+                                    Log.d(TAG, "Fallo al registrar el usuario")
+                                }
+                            }
 
                         if(it.isSuccessful){
                             startActivity(Intent(this,MainActivity::class.java))
