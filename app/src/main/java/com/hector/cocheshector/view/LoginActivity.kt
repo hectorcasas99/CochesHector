@@ -47,7 +47,7 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener{
         }
         when(view.id) {
             R.id.register_btn -> {
-               // startActivity(Intent(this, RegisterActivity::class.java))
+               startActivity(Intent(this, RegisterActivity::class.java))
             }
         }
     }
