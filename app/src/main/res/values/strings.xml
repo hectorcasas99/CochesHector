@@ -7,6 +7,49 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <!-- Menú View Principal -->
+    <string name="perfil">Mi Perfil</string>
+    <string name="salir">Salir</string>
+
+
+    <!-- Login View -->
+    <string name="nameApp">Coches.Hector</string>
+    <string name="iniciarSesion">Iniciar Sesión</string>
+    <string name="noTienesCuenta">¿Aún no tienes cuenta?</string>
+    <string name="registrarse">Registrate</string>
+
+    <!-- Register View -->
+    <string name="nombreCompleto">Nombre Completo</string>
+    <string name="nick">Nick</string>
+    <string name="email">Email</string>
+    <string name="contraseña">Contraseña</string>
+    <string name="contraseñados">Confirmar Contraseña</string>
+    <string name="todoVa">Contraseña</string>
+
+
+
+    <!-- Row Vehiculo -->
+    <string name="precio">Precio</string>
+    <string name="garantia">Garantía 2 años</string>
+    <string name="iva">IVA incluido</string>
+    <string name="euro">€</string>
+    <string name="km">km</string>
+
+    <!-- View Add Vehiculo -->
+    <string name="nameView">Agregando un Vehiculo</string>
+    <string name="anno">Año</string>
+    <string name="carroceria">Carroceria</string>
+    <string name="color">Color</string>
+    <string name="marca">Marca</string>
+    <string name="modelo">Modelo</string>
+    <string name="registrarVehiculo">Registrar Vehiculo</string>
+    <string-array name="Carrocerias">
+        <item>Coupé</item>
+        <item>Berlina</item>
+        <item>Berlina XL</item>
+        <item>SUV</item>
+        <item>Compacto</item>
+        <item>Roadster</item>
+    </string-array>
 </resources>

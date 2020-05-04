@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondodegradado"
+    tools:context=".view.LoginActivity">
+
+    <TextView
+        android:id="@+id/nombreApp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:text="@string/nameApp"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:textColor="@color/colorNegro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edt_email"
+        app:layout_constraintTop_toBottomOf="@+id/nombreApp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/round_edt_style"
+        android:inputType="textEmailAddress"
+        android:hint="Email"
+        android:textColor="@color/colorNegro"/>
+    <EditText
+        android:id="@+id/edt_password"
+        app:layout_constraintTop_toBottomOf="@+id/edt_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/round_edt_style"
+        android:inputType="textPassword"
+        android:hint="Contraseña"
+        android:textColor="@color/colorNegro"/>
+
+    <Button
+        android:id="@+id/login_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:background="@drawable/round_btn_style"
+        android:text="@string/iniciarSesion"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorAzulLetraBoton"
+        app:layout_constraintTop_toBottomOf="@+id/edt_password"
+        tools:layout_editor_absoluteX="49dp"
+        android:textAllCaps="false"/>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="@string/noTienesCuenta"
+        android:textStyle="bold"
+        android:textColor="@color/colorNegro"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_btn" />
+
+    <Button
+        android:id="@+id/register_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:background="@drawable/round_btn_style"
+        android:text="@string/registrarse"
+        android:textColor="@color/colorAzulLetraBoton"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        tools:layout_editor_absoluteX="50dp"
+        android:textAllCaps="false"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
