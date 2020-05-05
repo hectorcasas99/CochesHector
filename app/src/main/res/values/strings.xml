@@ -11,6 +11,7 @@
     <!-- Menú View Principal -->
     <string name="perfil">Mi Perfil</string>
     <string name="salir">Salir</string>
+    <string name="titulo">Encuentra tu juguete</string>
 
 
     <!-- Login View -->
