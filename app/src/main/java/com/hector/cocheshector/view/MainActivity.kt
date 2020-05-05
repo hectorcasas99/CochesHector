@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
@@ -111,6 +112,22 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun onClickRow(v: View){
+      // val vehiculoSelect = v.tag as Vehiculo
+
+          /*
+            val cartonmarcado=v.tag as Carton
+            if(cartonmarcado.selec){
+                cartonesclick.remove(cartonmarcado)
+                count--
+            }else{
+                cartonesclick.add(cartonmarcado)
+                count++
+            }
+            cartonmarcado.selec= !cartonmarcado.selec
+            adapter.notifyDataSetChanged()
+        }*/
+    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.

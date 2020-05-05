@@ -8,4 +8,5 @@
     <color name="colorNegro">#000000</color>
     <color name="colorRojo">#D40000</color>
     <color name="colorBlanco">#ffffff</color>
+    <color name="colorAzulRow">#E4F6FF</color>
 </resources>
