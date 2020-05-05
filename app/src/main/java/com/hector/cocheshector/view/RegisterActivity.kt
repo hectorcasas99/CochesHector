@@ -87,7 +87,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener  {
                             .addOnSuccessListener { documentReference ->
                                 if(it.isSuccessful){
                                     Log.d(TAG,"DocumentSnapshot added with ID: " + documentReference.id)
-                                    idUser = documentReference.id
+                                    idUser = (documentReference.id).toString()
                                     startActivity(Intent(this,MainActivity::class.java).putExtra("idUser", idUser))
                                     finish()
                                 } else {

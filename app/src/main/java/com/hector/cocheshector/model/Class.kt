@@ -6,7 +6,7 @@ data class Usuario(
     val nombre: String,
     val nick: String,
     val email: String,
-    val foto: String=""
+    val foto: String
 )
 
 data class Vehiculo(

@@ -11,10 +11,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.hector.cocheshector.R
 
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.alert
-import org.jetbrains.anko.longToast
-import org.jetbrains.anko.noButton
-import org.jetbrains.anko.yesButton
+import org.jetbrains.anko.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,16 +24,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        //val iduser = intent.getSerializableExtra("idUser") as String
-        //longToast("tu: ${iduser}")
         val iduser = intent.getSerializableExtra("idUser") as String
-        longToast("tu: ${iduser}")
+
 
         mAuth = FirebaseAuth.getInstance()
 
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+            toast("tu: ${iduser}")
         }
     }
 
