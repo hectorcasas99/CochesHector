@@ -2,16 +2,20 @@ package com.hector.cocheshector.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.hector.cocheshector.R
 import com.hector.cocheshector.adapter.CustomAdapter
 import com.hector.cocheshector.model.Vehiculo
 
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.content_main.*
 import org.jetbrains.anko.*
 
 class MainActivity : AppCompatActivity() {
@@ -41,18 +45,40 @@ class MainActivity : AppCompatActivity() {
 
     private fun initRV() {
         adapter = CustomAdapter(this, R.layout.rowvehiculos)
-
-        /*
-        adapter = CustomAdapter(this, R.layout.row)
-        rv.adapter = adapter
-        rv.layoutManager = LinearLayoutManager(this)
-         */
+        rvVehiculos.adapter = adapter
+        rvVehiculos.layoutManager = LinearLayoutManager(this)
     }
 
     private fun setListener() {
-
+        val docRef = db.collection("vehiculos")
+        docRef.addSnapshotListener { snapshot, e ->
+            if (e != null) {
+                Log.w(TAG, "Listen failed.", e)
+                return@addSnapshotListener
+            }
+            if (snapshot != null && !snapshot.isEmpty) {
+                documentToList(snapshot.documents)
+                adapter.setVehiculos(vehiculos)
+            } else {
+                Log.d(TAG, "Current data: null")
+            }
+        }
     }
-
+    private fun documentToList(documents: List<DocumentSnapshot>) {
+        vehiculos.clear()
+        documents.forEach{d ->
+            val marca = d["marca"] as String
+            val modelo = d["modelo"] as String
+            val color = d["color"] as String
+            val anno = d["anno"] as String
+            val carroceria = d["carroceria"] as String
+            val km = d["km"] as String
+            val precio = d["precio"] as String
+            val fotos = d["fotos"] as ArrayList<String>
+            val iduser = d["iduser"] as String
+            vehiculos.add(Vehiculo(marca = marca, modelo = modelo, color = color, anno = anno, carroceria = carroceria, km = km, precio = precio, fotos = fotos, idUser = iduser))
+        }
+    }
 
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
