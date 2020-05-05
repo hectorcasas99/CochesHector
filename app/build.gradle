@@ -83,6 +83,7 @@ dependencies {
     implementation("com.squareup.picasso:picasso:$picassoVersion") {
         exclude group: "com.android.support"
     }
+    implementation 'com.synnapps:carouselview:0.1.5'
 
 
 }

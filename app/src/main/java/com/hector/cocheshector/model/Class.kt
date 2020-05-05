@@ -19,4 +19,4 @@ data class Vehiculo(
     val precio: String,
     val fotos: ArrayList<String>,
     val idUser: String
-)
+):Serializable

@@ -113,20 +113,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onClickRow(v: View){
-      // val vehiculoSelect = v.tag as Vehiculo
-
-          /*
-            val cartonmarcado=v.tag as Carton
-            if(cartonmarcado.selec){
-                cartonesclick.remove(cartonmarcado)
-                count--
-            }else{
-                cartonesclick.add(cartonmarcado)
-                count++
-            }
-            cartonmarcado.selec= !cartonmarcado.selec
-            adapter.notifyDataSetChanged()
-        }*/
+        val vehiculoSelect = v.tag as Vehiculo
+        startActivity(Intent(this,InfoVehiculoActivity::class.java).putExtra("vehiculoSelect",vehiculoSelect))
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
