@@ -25,6 +25,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mAuth: FirebaseAuth
     private lateinit var db: FirebaseFirestore
     private var vehiculos: ArrayList<Vehiculo> = ArrayList()
+    private var fotos: ArrayList<String> = ArrayList()
+    val foto = "https://cdn.motor1.com/images/mgl/pvvk1/s1/ferrari-f8-tributo-in-london.jpg"
+    val foto2 = "https://cdn.motor1.com/images/mgl/byyNj/s1/ferrari-f8-tributo-in-london.jpg"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,9 +41,37 @@ class MainActivity : AppCompatActivity() {
         initRV()
         setListener()
 
+        fotos.add(foto)
+        fotos.add(foto2)
+
         fab.setOnClickListener { view ->
             toast("tu: ${iduser}")
+            addCarro()
         }
+    }
+
+    private fun addCarro() {
+        val vehiculo: MutableMap<String, Any> = HashMap()
+        vehiculo["marca"] = "Ferrari"
+        vehiculo["modelo"] = "F8 Tributo"
+        vehiculo["color"] = "Rojo"
+        vehiculo["anno"] = "2020"
+        vehiculo["carroceria"] = "Coupé"
+        vehiculo["km"] = "200"
+        vehiculo["precio"] = "300000"
+        vehiculo["fotos"] = fotos
+        vehiculo["iduser"] = "4TtGH5vgH52wKQutjKfY\n"
+
+
+        db.collection("vehiculos")
+            .add(vehiculo)
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    Log.d(TAG, "Usuario registrado correctamente")
+                } else {
+                    Log.d(TAG, "Fallo al registrar el usuario")
+                }
+            }
     }
 
     private fun initRV() {
