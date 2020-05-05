@@ -8,6 +8,7 @@ import android.view.View
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.hector.cocheshector.R
+import com.hector.cocheshector.model.Usuario
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_login.edt_email
 import kotlinx.android.synthetic.main.activity_login.edt_password
@@ -22,12 +23,16 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener  {
 
     private lateinit var mAuth: FirebaseAuth
     private lateinit var db: FirebaseFirestore
+    private var idUser: String = ""
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
         mAuth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
+
 
         register_btn.setOnClickListener(this)
         profile_picture.setOnClickListener(this)
@@ -64,27 +69,32 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener  {
                 mAuth.createUserWithEmailAndPassword(email,pass1).addOnCompleteListener {
                     if(it.isSuccessful){
                         //add user
-                        val user = hashMapOf(
-                            "nombre" to nombre,
-                            "nick" to nick,
-                            "email" to email,
-                            "foto" to "null")
+                        val user: MutableMap<String, Any> = HashMap()
+                        user["nombre"] = nombre
+                        user["nick"] = nick
+                        user["email"] = email
+                        user["foto"] = "null"
 
                         db.collection("usuarios")
-                            .add(user as Map<String, Any>).addOnCompleteListener {
-                                if(it.isSuccessful){
+                            .add(user)
+                            .addOnCompleteListener {
+                                if (it.isSuccessful) {
                                     Log.d(TAG, "Usuario registrado correctamente")
                                 } else {
                                     Log.d(TAG, "Fallo al registrar el usuario")
                                 }
                             }
+                            .addOnSuccessListener { documentReference ->
+                                if(it.isSuccessful){
+                                    Log.d(TAG,"DocumentSnapshot added with ID: " + documentReference.id)
+                                    idUser = documentReference.id
+                                    startActivity(Intent(this,MainActivity::class.java).putExtra("idUser", idUser))
+                                    finish()
+                                } else {
+                                    Log.d(TAG, "Fallo al registrar el usuario")
+                                }
 
-                        if(it.isSuccessful){
-                            startActivity(Intent(this,MainActivity::class.java))
-                            finish()
-                        }else {
-                            longToast("lo siento algo no va bien")
-                        }
+                            }
                     } else {
                         longToast("adios")
                     }
