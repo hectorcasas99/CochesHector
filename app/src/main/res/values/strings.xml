@@ -36,10 +36,18 @@
     <string name="euro">€</string>
     <string name="km">km</string>
 
+    <!-- View Info Vehiculo -->
+    <string name="info">Seguimos a tu lado</string>
+    <string name="info2">Si te gusta este coche contacta por email, pide información, más fotos o resérvalo sin moverte de casa.</string>
+    <string name="info3">Datos del Vehiculo</string>
+    <string name="info4">Datos del Vendedor</string>
+
+
     <!-- View Add Vehiculo -->
     <string name="nameView">Agregando un Vehiculo</string>
     <string name="anno">Año</string>
     <string name="carroceria">Carroceria</string>
+    <string name="caballos">Caballos</string>
     <string name="color">Color</string>
     <string name="marca">Marca</string>
     <string name="modelo">Modelo</string>
@@ -50,6 +58,7 @@
         <item>Berlina XL</item>
         <item>SUV</item>
         <item>Compacto</item>
-        <item>Roadster</item>
+        <item>Cabrio</item>
+        <item>Clásicos</item>
     </string-array>
 </resources>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="@color/colorAzulRow"
     android:layout_marginStart="10dp"
@@ -39,7 +40,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="10dp"
         android:text="300.000"
         android:textColor="@color/colorRojo"
         android:textSize="35sp"
@@ -64,7 +64,7 @@
         android:id="@+id/tvNombreVehiculo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="2dp"
         android:text="Lamborghini Huracán"
         android:textColor="@color/colorNegro"
         android:textSize="25sp"
@@ -159,6 +159,17 @@
         app:layout_constraintTop_toTopOf="@+id/tvkm" />
 
     <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="|"
+        android:textColor="@color/colorNegro"
+        app:layout_constraintStart_toEndOf="@+id/tvAnno"
+        app:layout_constraintTop_toTopOf="@+id/tvkm" />
+
+    <TextView
         android:id="@+id/tvAnno"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -167,6 +178,28 @@
         android:text="2016"
         android:textColor="@color/colorNegro"
         app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintTop_toTopOf="@+id/tvkm" />
+
+    <TextView
+        android:id="@+id/tvCaballos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="1500"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        android:textColor="@color/colorNegro"
+        app:layout_constraintTop_toTopOf="@+id/tvkm" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginLeft="3dp"
+        android:text="CV"
+        android:textColor="@color/colorNegro"
+        app:layout_constraintStart_toEndOf="@+id/tvCaballos"
         app:layout_constraintTop_toTopOf="@+id/tvkm" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

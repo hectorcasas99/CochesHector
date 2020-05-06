@@ -27,15 +27,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var db: FirebaseFirestore
     private var vehiculos: ArrayList<Vehiculo> = ArrayList()
     private var fotos: ArrayList<String> = ArrayList()
-    val foto = "https://cdn.motor1.com/images/mgl/pvvk1/s1/ferrari-f8-tributo-in-london.jpg"
-    val foto2 = "https://cdn.motor1.com/images/mgl/byyNj/s1/ferrari-f8-tributo-in-london.jpg"
-
+    val foto = "https://lh3.googleusercontent.com/proxy/-KMULGughzLjU7geeQ2HVdDKTEUq7hSEx22wagWDjzwkXEQiGpgno0VgBa1UgeSIRJ07WWj7-R4K8LuWeQeJaA1Rt11dQsABVanDucod4JC42MvGnXsb7Y0C7HGAEIX6VdkeBJ9xvzDqmkm6OjhdqJ8gaDCYhQijK-1q3k4"
+    val foto2 = "https://img.milanuncios.com/fg/3281/14/328114639_1.jpg?VersionId=fCPavMPAngHMX5oeA8OqCi1mofOaPlQQ"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        val iduser = intent.getSerializableExtra("idUser") as String?
+
 
         mAuth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
@@ -46,75 +45,76 @@ class MainActivity : AppCompatActivity() {
         fotos.add(foto2)
 
         fab.setOnClickListener { view ->
-            toast("tu: ${iduser}")
-            addCarro()
+            startActivity(Intent(this,InfoVehiculoActivity::class.java))
         }
     }
 
-    private fun addCarro() {
+    /*private fun addCarro() {
         val vehiculo: MutableMap<String, Any> = HashMap()
-        vehiculo["marca"] = "Ferrari"
-        vehiculo["modelo"] = "F8 Tributo"
-        vehiculo["color"] = "Rojo"
+        vehiculo["marca"] = "Lamborghini"
+        vehiculo["modelo"] = "Huracan EVO"
+        vehiculo["color"] = "Azul"
         vehiculo["anno"] = "2020"
         vehiculo["carroceria"] = "Coupé"
+        vehiculo["caballos"] = "640"
         vehiculo["km"] = "200"
-        vehiculo["precio"] = "300000"
+        vehiculo["precio"] = "350000"
         vehiculo["fotos"] = fotos
-        vehiculo["iduser"] = "4TtGH5vgH52wKQutjKfY\n"
+        vehiculo["iduser"] = "4TtGH5vgH52wKQutjKfY"
 
 
         db.collection("vehiculos")
             .add(vehiculo)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
-                    Log.d(TAG, "Usuario registrado correctamente")
+                    Log.d(TAG, "Vehicula registrado correctamente")
+                    toast("Tu vehiculo se ha añadido correctamente")
                 } else {
-                    Log.d(TAG, "Fallo al registrar el usuario")
+                    Log.d(TAG, "Fallo al registrar el vehiculo")
                 }
             }
-    }
+    }*/
 
-    private fun initRV() {
+    private fun initRV(){
         adapter = CustomAdapter(this, R.layout.rowvehiculos)
         rvVehiculos.adapter = adapter
         rvVehiculos.layoutManager = LinearLayoutManager(this)
     }
-
-    private fun setListener() {
+    private fun setListener(){
         val docRef = db.collection("vehiculos")
         docRef.addSnapshotListener { snapshot, e ->
-            if (e != null) {
-                Log.w(TAG, "Listen failed.", e)
+            if(e != null){
+                Log.w(TAG, "listen FAIL", e)
                 return@addSnapshotListener
             }
-            if (snapshot != null && !snapshot.isEmpty) {
+            if(snapshot != null && !snapshot.isEmpty){
                 documentToList(snapshot.documents)
                 adapter.setVehiculos(vehiculos)
-            } else {
-                Log.d(TAG, "Current data: null")
+            }else{
+                Log.d(TAG, "Current Data: Null")
             }
         }
     }
-    private fun documentToList(documents: List<DocumentSnapshot>) {
+    private fun documentToList(documents: List<DocumentSnapshot>){
         vehiculos.clear()
         documents.forEach{d ->
-            val marca = d["marca"] as String
-            val modelo = d["modelo"] as String
-            val color = d["color"] as String
-            val anno = d["anno"] as String
-            val carroceria = d["carroceria"] as String
-            val km = d["km"] as String
-            val precio = d["precio"] as String
+            val marca = d["marca"] as? String
+            val modelo = d["modelo"] as?String
+            val color = d["color"] as? String
+            val anno = d["anno"] as? String
+            val carroceria = d["carroceria"] as? String
+            val caballos = d["caballos"] as? String
+            val km = d["km"] as? String
+            val precio = d["precio"] as? String
             val fotos = d["fotos"] as ArrayList<String>
-            val iduser = d["iduser"] as String
-            vehiculos.add(Vehiculo(marca = marca, modelo = modelo, color = color, anno = anno, carroceria = carroceria, km = km, precio = precio, fotos = fotos, idUser = iduser))
+            val iduser = d["iduser"] as? String
+            vehiculos.add(Vehiculo(marca = marca, modelo = modelo, color = color, anno = anno, carroceria = carroceria, caballos = caballos, km = km, precio = precio, fotos = fotos, iduser = iduser))
         }
     }
 
     fun onClickRow(v: View){
         val vehiculoSelect = v.tag as Vehiculo
-        startActivity(Intent(this,InfoVehiculoActivity::class.java).putExtra("vehiculoSelect",vehiculoSelect))
+        startActivity(Intent(this,InfoVehiculoActivity::class.java).putExtra("vehiculoSelect", vehiculoSelect))
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

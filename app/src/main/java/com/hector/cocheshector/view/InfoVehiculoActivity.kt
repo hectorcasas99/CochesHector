@@ -20,8 +20,16 @@ class InfoVehiculoActivity : AppCompatActivity() {
         val vehiculo = intent.getSerializableExtra("vehiculoSelect") as Vehiculo
 
         tvNombreVehiculo.text = "${vehiculo.marca} ${vehiculo.modelo}"
-        tvPrecio.text = "${dec.format(vehiculo.precio.toInt())}"
+        tvPrecio.text = "${dec.format(vehiculo.precio!!.toInt())}"
         Picasso.get().load(vehiculo.fotos[0]).into(ivInfoCarro)
+        tvanno1.text = vehiculo.anno
+        tvkm1.text = vehiculo.km
+
+        if(vehiculo.carroceria=="Clásico" || vehiculo.km!!.toInt()<1000){
+            tvGanga.text = "!!ESTE COCHE ES UNA GANGA!!"
+        }
+        tvcaballos1.text = vehiculo.caballos
+        tvcolor1.text = vehiculo.color
 
     }
 }

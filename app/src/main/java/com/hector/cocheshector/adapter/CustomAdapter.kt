@@ -42,11 +42,12 @@ class CustomAdapter(val context: Context,
 
     class ViewHolder(viewlayout: View, val context: Context) : RecyclerView.ViewHolder(viewlayout) {
         fun bind(dataItem: Vehiculo){
-            val dec = DecimalFormat("###,###,###")
+           val dec = DecimalFormat("###,###,###")
             itemView.tvNombreVehiculo.text = "${dataItem.marca} ${dataItem.modelo}"
-            itemView.tvPrecio.text =  "${dec.format(dataItem.precio.toInt())}"
-            itemView.tvkm.text = dataItem.km
+            itemView.tvPrecio.text = "${dec.format(dataItem.precio!!.toInt())}"
+            itemView.tvkm.text = "${dec.format(dataItem.km!!.toInt())}"
             itemView.tvCarroceria.text = dataItem.carroceria
+            itemView.tvCaballos.text = dataItem.caballos
             Picasso.get().load(dataItem.fotos[0]).into(itemView.ivCarro)
 
             itemView.tag = dataItem
