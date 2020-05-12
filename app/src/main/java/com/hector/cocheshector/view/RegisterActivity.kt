@@ -14,8 +14,7 @@ import kotlinx.android.synthetic.main.activity_login.edt_email
 import kotlinx.android.synthetic.main.activity_login.edt_password
 import kotlinx.android.synthetic.main.activity_login.register_btn
 import kotlinx.android.synthetic.main.activity_register.*
-import org.jetbrains.anko.longToast
-import org.jetbrains.anko.toast
+import org.jetbrains.anko.*
 
 class RegisterActivity : AppCompatActivity(), View.OnClickListener  {
 
@@ -34,8 +33,8 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener  {
         db = FirebaseFirestore.getInstance()
 
 
-        register_btn.setOnClickListener(this)
         profile_picture.setOnClickListener(this)
+        register_btn.setOnClickListener(this)
     }
 
     override fun onClick(view: View) {
@@ -61,6 +60,8 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener  {
         val email = edt_email.text.toString()
         val pass1 = edt_password.text.toString()
         val pass2 = edt_password2.text.toString()
+        val foto = "null"
+        var iduser = "null"
 
         if(nombre.isEmpty() || nick.isEmpty() || email.isEmpty() || pass1.isEmpty() || pass2.isEmpty()){
             longToast("Todos los campos son necesarios")
@@ -74,6 +75,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener  {
                         user["nick"] = nick
                         user["email"] = email
                         user["foto"] = "null"
+                        user["iduser"] = "null"
 
                         db.collection("usuarios")
                             .add(user)
@@ -96,7 +98,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener  {
 
                             }
                     } else {
-                        longToast("adios")
+                        toast("Fallo al escribir el correo")
                     }
                 }
             } else {

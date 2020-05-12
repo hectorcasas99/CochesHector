@@ -13,6 +13,7 @@ import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.hector.cocheshector.R
 import com.hector.cocheshector.adapter.CustomAdapter
+import com.hector.cocheshector.model.Usuario
 import com.hector.cocheshector.model.Vehiculo
 
 import kotlinx.android.synthetic.main.activity_main.*
@@ -25,28 +26,54 @@ class MainActivity : AppCompatActivity() {
     private lateinit var adapter: CustomAdapter
     private lateinit var mAuth: FirebaseAuth
     private lateinit var db: FirebaseFirestore
+    var emailCurrent: String=""
     private var vehiculos: ArrayList<Vehiculo> = ArrayList()
-    private var fotos: ArrayList<String> = ArrayList()
-    val foto = "https://lh3.googleusercontent.com/proxy/-KMULGughzLjU7geeQ2HVdDKTEUq7hSEx22wagWDjzwkXEQiGpgno0VgBa1UgeSIRJ07WWj7-R4K8LuWeQeJaA1Rt11dQsABVanDucod4JC42MvGnXsb7Y0C7HGAEIX6VdkeBJ9xvzDqmkm6OjhdqJ8gaDCYhQijK-1q3k4"
-    val foto2 = "https://img.milanuncios.com/fg/3281/14/328114639_1.jpg?VersionId=fCPavMPAngHMX5oeA8OqCi1mofOaPlQQ"
+    private var iduser: String? = ""
+
+    /*private var fotos: ArrayList<String> = ArrayList()
+    val foto = ""
+    val foto2 = ""
+     */
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
+        iduser = intent.getSerializableExtra("idUser") as? String
 
 
         mAuth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
+
+        // OBTENIENDO DATOS DEL CURRENT USER
+        emailCurrent = (mAuth.currentUser!!.email).toString()
+
+
         initRV()
         setListener()
-
-        fotos.add(foto)
-        fotos.add(foto2)
-
-        fab.setOnClickListener { view ->
-            startActivity(Intent(this,InfoVehiculoActivity::class.java))
+        if(iduser!=null){
+            actualizarIdUser()
         }
+
+        /*fotos.add(foto)
+        fotos.add(foto2)*/
+        btnFiltrar.setOnClickListener{ filtrar() }
+        fab.setOnClickListener { view ->
+            startActivity(Intent(this,AddCarroActivity::class.java))
+        }
+    }
+
+    private fun filtrar() {
+        toast("hola manito filtramos tu carrito")
+    }
+
+
+    private fun actualizarIdUser() {
+        val idRef = db.collection("usuarios").document("${iduser}")
+        idRef.update("iduser", iduser)
+            .addOnSuccessListener {Log.d(TAG, "DocumentSnapshot successfully updated!")}
+            .addOnFailureListener { e -> Log.w(TAG, "Error updating document", e) }
     }
 
     /*private fun addCarro() {

@@ -6,7 +6,8 @@ data class Usuario(
     val nombre: String,
     val nick: String,
     val email: String,
-    val foto: String=""
+    val foto: String="",
+    val iduser: String=""
 ):Serializable
 
 data class Vehiculo(
