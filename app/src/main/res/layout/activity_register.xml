@@ -12,9 +12,20 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginTop="50dp"
-        android:src="@drawable/usernoimage"
         app:civ_border_width="3dp"
+        android:background="@drawable/usernoimage"
         app:civ_circle_background_color="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/btntuFoto"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="50dp"
+        android:background="@color/colorTrans"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,14 +34,15 @@
         android:id="@+id/edt_nombreCompleto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
         android:layout_marginStart="50dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="50dp"
         android:background="@drawable/round_edt_style"
         android:hint="@string/nombreCompleto"
         android:paddingLeft="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/profile_picture"
-        tools:layout_editor_absoluteX="50dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_picture" />
     <EditText
         android:id="@+id/edt_nick"
         android:background="@drawable/round_edt_style"

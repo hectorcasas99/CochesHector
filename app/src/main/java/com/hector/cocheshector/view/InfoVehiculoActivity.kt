@@ -10,6 +10,12 @@ import com.hector.cocheshector.model.Vehiculo
 import com.squareup.picasso.Picasso
 import com.synnapps.carouselview.ImageListener
 import kotlinx.android.synthetic.main.activity_info_vehiculo.*
+import kotlinx.android.synthetic.main.activity_info_vehiculo.tvNombreVehiculo
+import kotlinx.android.synthetic.main.activity_info_vehiculo.tvPrecio
+import kotlinx.android.synthetic.main.rowvehiculos.*
+import kotlinx.android.synthetic.main.rowvehiculos.view.*
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.toast
 import java.text.DecimalFormat
 
 class InfoVehiculoActivity : AppCompatActivity() {
@@ -20,43 +26,50 @@ class InfoVehiculoActivity : AppCompatActivity() {
     private lateinit var user: Usuario
     val dec = DecimalFormat("###,###,###")
 
+    var email: String? =""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_info_vehiculo)
 
-
         db = FirebaseFirestore.getInstance()
         vehiculo = intent.getSerializableExtra("vehiculoSelect") as Vehiculo
+
+
         //usuario = intent.getSerializableExtra("usuario") as Usuario
         infoUser()
         rellenarDatos()
 
     }
 
+
+
     private fun infoUser() {
-       /* val docRef = db.collection("usuarios").document("${vehiculo.iduser}")
-        docRef.get()
-            .addOnSuccessListener { document ->
-                if (document != null) {
-                    Log.d(TAG, "DocumentSnapshot data: ${document.data}")
-                } else {
-                    Log.d(TAG, "No such document")
+            db.collection("usuarios").document("${vehiculo.iduser}").get()
+                .addOnSuccessListener { document ->
+                    if(document.exists()){
+                        //traemos datos
+                        email = document.getString("email")
+                        Log.d(TAG, "el propietario es:  ${email}")
+                    } else {
+                        Log.d(TAG, "no existe")
+                    }
                 }
-            }
-            .addOnFailureListener { exception ->
-                Log.d(TAG, "get failed with ", exception)
-            }*/
-        val docRef = db.collection("usuarios").document("${vehiculo.iduser}")
-        docRef.get().addOnSuccessListener { documentSnapshot ->
-            user = documentSnapshot.toObject(Usuario::class.java)!!
-        }
+
+
     }
 
 
     private fun rellenarDatos() {
         tvNombreVehiculo.text = "${vehiculo.marca} ${vehiculo.modelo}"
         tvPrecio.text = "${dec.format(vehiculo.precio!!.toInt())}"
-        Picasso.get().load(vehiculo.fotos[0]).into(ivInfoCarro)
+
+        if(vehiculo.fotos.equals("")){
+            Picasso.get().load(R.drawable.coche).into(ivCarro)
+        }else {
+            Picasso.get().load(vehiculo.fotos).into(ivcarro)
+        }
+
         tvanno1.text = vehiculo.anno
         tvkm1.text = "${dec.format(vehiculo.km!!.toInt())}"
         tvCarroceria1.text = vehiculo.carroceria
@@ -73,10 +86,9 @@ class InfoVehiculoActivity : AppCompatActivity() {
         tvcaballos1.text = "${dec.format(vehiculo.caballos!!.toInt())}"
         tvcolor1.text = vehiculo.color
 
-        // DATOS USER
-        tvnombre1.text = user.nombre
-        tvnick1.text = user.nick
-        tvemail1.text = user.email
+        // DATOS USE
+
+        tvemail1.text = email
 
     }
 }

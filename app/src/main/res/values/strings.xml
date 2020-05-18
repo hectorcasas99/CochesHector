@@ -42,7 +42,7 @@
     <string name="info2">Si te gusta este coche contacta por email, pide información, más fotos o resérvalo sin moverte de casa.</string>
     <string name="info3">Datos del Vehiculo</string>
     <string name="info4">Datos del Vendedor</string>
-    <string name="nombre">Nombre Vendedor</string>
+    <string name="nombre">Nombre </string>
 
 
     <!-- View Add Vehiculo -->
@@ -53,7 +53,7 @@
     <string name="color">Color</string>
     <string name="marca">Marca</string>
     <string name="modelo">Modelo</string>
-    <string name="addfoto">Fotos</string>
+    <string name="addfoto">Foto</string>
     <string name="registrarVehiculo">Registrar Vehiculo</string>
 
 </resources>

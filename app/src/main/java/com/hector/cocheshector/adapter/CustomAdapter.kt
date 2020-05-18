@@ -5,9 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.hector.cocheshector.R
 import com.hector.cocheshector.model.Vehiculo
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_info_vehiculo.view.*
 import kotlinx.android.synthetic.main.rowvehiculos.view.*
+import kotlinx.android.synthetic.main.rowvehiculos.view.tvCarroceria
+import kotlinx.android.synthetic.main.rowvehiculos.view.tvNombreVehiculo
+import kotlinx.android.synthetic.main.rowvehiculos.view.tvPrecio
+import kotlinx.android.synthetic.main.rowvehiculos.view.tvkm
 import java.text.DecimalFormat
 
 /**
@@ -44,11 +50,16 @@ class CustomAdapter(val context: Context,
         fun bind(dataItem: Vehiculo){
            val dec = DecimalFormat("###,###,###")
             itemView.tvNombreVehiculo.text = "${dataItem.marca} ${dataItem.modelo}"
-            itemView.tvPrecio.text = "${dec.format(dataItem.precio!!.toInt())}"
+            itemView.tvPrecio.text = "${dec.format(dataItem.precio!!.toInt())}€"
             itemView.tvkm.text = "${dec.format(dataItem.km!!.toInt())}"
             itemView.tvCarroceria.text = dataItem.carroceria
             itemView.tvCaballos.text = dataItem.caballos
-            Picasso.get().load(dataItem.fotos[0]).into(itemView.ivCarro)
+            //itemView.tvanno.text = dataItem?.anno
+            if(dataItem.fotos.equals("")){
+                Picasso.get().load(R.drawable.coche).into(itemView.ivCarro)
+            }else {
+                Picasso.get().load(dataItem?.fotos).into(itemView.ivCarro)
+            }
 
             itemView.tag = dataItem
 

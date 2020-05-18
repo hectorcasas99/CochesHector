@@ -19,6 +19,7 @@ data class Vehiculo(
     val caballos: String?=null,
     val km: String?=null,
     val precio: String?=null,
-    val fotos: ArrayList<String>,
-    val iduser: String?=null
+    val fotos: String?=null,
+    val iduser: String?=null,
+    val comprado: Boolean=false
 ):Serializable

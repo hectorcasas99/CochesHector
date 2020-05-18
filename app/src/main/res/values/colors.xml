@@ -9,4 +9,5 @@
     <color name="colorRojo">#D40000</color>
     <color name="colorBlanco">#ffffff</color>
     <color name="colorAzulRow">#E4F6FF</color>
+    <color name="colorTrans">#00000000</color>
 </resources>

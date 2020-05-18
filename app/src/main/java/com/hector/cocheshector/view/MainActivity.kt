@@ -13,9 +13,7 @@ import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.hector.cocheshector.R
 import com.hector.cocheshector.adapter.CustomAdapter
-import com.hector.cocheshector.model.Usuario
 import com.hector.cocheshector.model.Vehiculo
-
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import org.jetbrains.anko.*
@@ -29,11 +27,6 @@ class MainActivity : AppCompatActivity() {
     var emailCurrent: String=""
     private var vehiculos: ArrayList<Vehiculo> = ArrayList()
     private var iduser: String? = ""
-
-    /*private var fotos: ArrayList<String> = ArrayList()
-    val foto = ""
-    val foto2 = ""
-     */
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,18 +49,12 @@ class MainActivity : AppCompatActivity() {
             actualizarIdUser()
         }
 
-        /*fotos.add(foto)
-        fotos.add(foto2)*/
-        btnFiltrar.setOnClickListener{ filtrar() }
+
         fab.setOnClickListener { view ->
-            startActivity(Intent(this,AddCarroActivity::class.java))
+            startActivity(Intent(this,AddCarroActivity::class.java).putExtra("iduser",iduser))
         }
-    }
 
-    private fun filtrar() {
-        toast("hola manito filtramos tu carrito")
     }
-
 
     private fun actualizarIdUser() {
         val idRef = db.collection("usuarios").document("${iduser}")
@@ -75,32 +62,6 @@ class MainActivity : AppCompatActivity() {
             .addOnSuccessListener {Log.d(TAG, "DocumentSnapshot successfully updated!")}
             .addOnFailureListener { e -> Log.w(TAG, "Error updating document", e) }
     }
-
-    /*private fun addCarro() {
-        val vehiculo: MutableMap<String, Any> = HashMap()
-        vehiculo["marca"] = "Lamborghini"
-        vehiculo["modelo"] = "Huracan EVO"
-        vehiculo["color"] = "Azul"
-        vehiculo["anno"] = "2020"
-        vehiculo["carroceria"] = "Coupé"
-        vehiculo["caballos"] = "640"
-        vehiculo["km"] = "200"
-        vehiculo["precio"] = "350000"
-        vehiculo["fotos"] = fotos
-        vehiculo["iduser"] = "4TtGH5vgH52wKQutjKfY"
-
-
-        db.collection("vehiculos")
-            .add(vehiculo)
-            .addOnCompleteListener {
-                if (it.isSuccessful) {
-                    Log.d(TAG, "Vehicula registrado correctamente")
-                    toast("Tu vehiculo se ha añadido correctamente")
-                } else {
-                    Log.d(TAG, "Fallo al registrar el vehiculo")
-                }
-            }
-    }*/
 
     private fun initRV(){
         adapter = CustomAdapter(this, R.layout.rowvehiculos)
@@ -110,7 +71,7 @@ class MainActivity : AppCompatActivity() {
     private fun setListener(){
         val docRef = db.collection("vehiculos")
         docRef.addSnapshotListener { snapshot, e ->
-            if(e != null){
+            if(e!=null){
                 Log.w(TAG, "listen FAIL", e)
                 return@addSnapshotListener
             }
@@ -118,24 +79,26 @@ class MainActivity : AppCompatActivity() {
                 documentToList(snapshot.documents)
                 adapter.setVehiculos(vehiculos)
             }else{
-                Log.d(TAG, "Current Data: Null")
+                Log.d(TAG, "Current data: Null")
             }
         }
     }
-    private fun documentToList(documents: List<DocumentSnapshot>){
+
+    private fun documentToList(documents: List<DocumentSnapshot>) {
         vehiculos.clear()
-        documents.forEach{d ->
+        documents.forEach{ d ->
             val marca = d["marca"] as? String
-            val modelo = d["modelo"] as?String
+            val modelo = d["modelo"] as? String
             val color = d["color"] as? String
             val anno = d["anno"] as? String
             val carroceria = d["carroceria"] as? String
             val caballos = d["caballos"] as? String
             val km = d["km"] as? String
             val precio = d["precio"] as? String
-            val fotos = d["fotos"] as ArrayList<String>
+            val fotos = d["fotos"] as? String
             val iduser = d["iduser"] as? String
-            vehiculos.add(Vehiculo(marca = marca, modelo = modelo, color = color, anno = anno, carroceria = carroceria, caballos = caballos, km = km, precio = precio, fotos = fotos, iduser = iduser))
+            val comprado = d["comprado"] as Boolean
+            vehiculos.add(Vehiculo(marca = marca, modelo = modelo, color = color, anno = anno, carroceria = carroceria, caballos = caballos, km = km, precio = precio, fotos = fotos, iduser = iduser, comprado = false))
         }
     }
 
@@ -155,9 +118,6 @@ class MainActivity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         val id = item!!.itemId
-        if( id == R.id.perfil ){
-            //startActivity(Intent(this, PerfilActivity::class.java))
-        }
         if( id == R.id.salir ){
             alert("¿Seguro que te quieres ir?") {
                 yesButton {

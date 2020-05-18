@@ -21,12 +21,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Spinner
-        android:id="@+id/spinMarca"
+    <EditText
+        android:id="@+id/edt_marca"
         android:layout_width="300dp"
         android:layout_height="45dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/round_edt_style"
+        android:hint="@string/marca"
+        android:paddingLeft="20dp"
+        android:textColor="@color/colorNegro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
@@ -42,13 +45,16 @@
         android:textColor="@color/colorNegro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinMarca" />
-    <Spinner
-        android:id="@+id/spinColor"
+        app:layout_constraintTop_toBottomOf="@+id/edt_marca" />
+    <EditText
+        android:id="@+id/edt_color"
         android:layout_width="300dp"
         android:layout_height="45dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/round_edt_style"
+        android:hint="@string/color"
+        android:paddingLeft="20dp"
+        android:textColor="@color/colorNegro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edt_modelo" />
@@ -60,7 +66,7 @@
         android:background="@drawable/round_edt_style"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinColor" />
+        app:layout_constraintTop_toBottomOf="@+id/edt_color" />
     <LinearLayout
         android:id="@+id/linear"
         android:layout_width="wrap_content"
@@ -152,6 +158,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linear2" />
 
+    <ImageView
+        android:id="@+id/ivFoto"
+        android:layout_width="250dp"
+        android:layout_height="110dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAddFoto"/>
+
     <Button
         android:id="@+id/btnRegistrarVehiculo"
         android:layout_width="wrap_content"
@@ -166,6 +180,6 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnAddFoto" />
+        app:layout_constraintTop_toBottomOf="@+id/ivFoto" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
