@@ -1,5 +1,6 @@
 package com.hector.cocheshector.view
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -41,17 +42,23 @@ class MainActivity : AppCompatActivity() {
 
         // OBTENIENDO DATOS DEL CURRENT USER
         emailCurrent = (mAuth.currentUser!!.email).toString()
+        val idPreference = getSharedPreferences("datos", Context.MODE_PRIVATE)
+
 
 
         initRV()
         setListener()
         if(iduser!=null){
             actualizarIdUser()
+            val idpref = idPreference.edit()
+            idpref.putString("iduser", "${iduser}")
+            idpref.commit()
         }
 
 
         fab.setOnClickListener { view ->
-            startActivity(Intent(this,AddCarroActivity::class.java).putExtra("iduser",iduser))
+            val userid = idPreference.getString("iduser", "null")
+            startActivity(Intent(this,AddCarroActivity::class.java).putExtra("userid",userid))
         }
 
     }

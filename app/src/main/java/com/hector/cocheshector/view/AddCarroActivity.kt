@@ -27,7 +27,7 @@ class AddCarroActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
     var carroceriaCoche:String = ""
 
     var foto:String = ""
-    var iduser: String? = ""
+    var userid:String = ""
     var selectedPhotoUri: Uri? =null
 
 
@@ -35,7 +35,9 @@ class AddCarroActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_carro)
 
-        iduser = intent.getSerializableExtra("idUser") as? String
+        userid = (intent.getSerializableExtra("userid") as? String).toString()
+
+        toast("$userid")
 
 
         db = FirebaseFirestore.getInstance()
@@ -78,7 +80,7 @@ class AddCarroActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
             val bitmapDrawable = BitmapDrawable(bitmap)
             ivFoto.setBackgroundDrawable(bitmapDrawable)
         }
-
+        subirfoto()
     }
     private fun subirfoto(){
         if(selectedPhotoUri == null) return
@@ -104,7 +106,7 @@ class AddCarroActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
         val km = edt_km.text.toString()
         val precio = edt_precio.text.toString()
         val fotos = foto
-        val iduser = "4TtGH5vgH52wKQutjKfY"
+        val iduser = userid
         val comprado = false
 
         if (iduser != null) {
@@ -129,7 +131,7 @@ class AddCarroActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
                     .addOnCompleteListener {
                         if (it.isSuccessful) {
                             Log.d(TAG, "Vehiculo registrado correctamente")
-                            subirfoto()
+
 
                         } else {
                             Log.d(TAG, "Fallo al registrar el usuario")

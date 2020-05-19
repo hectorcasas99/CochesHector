@@ -49,7 +49,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener  {
 
 
         register_btn.setOnClickListener(this)
-       // btntuFoto.setOnClickListener{fotoPerfil()}
+        //btntuFoto.setOnClickListener{fotoPerfil()}
     }
     override fun onClick(view: View) {
         when (view.id) {

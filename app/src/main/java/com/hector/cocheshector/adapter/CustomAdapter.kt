@@ -54,12 +54,9 @@ class CustomAdapter(val context: Context,
             itemView.tvkm.text = "${dec.format(dataItem.km!!.toInt())}"
             itemView.tvCarroceria.text = dataItem.carroceria
             itemView.tvCaballos.text = dataItem.caballos
-            //itemView.tvanno.text = dataItem?.anno
-            if(dataItem.fotos.equals("")){
-                Picasso.get().load(R.drawable.coche).into(itemView.ivCarro)
-            }else {
-                Picasso.get().load(dataItem?.fotos).into(itemView.ivCarro)
-            }
+            //itemView.tvanno.text = dataItem.anno
+            Picasso.get().load(dataItem?.fotos).into(itemView.ivCarro)
+
 
             itemView.tag = dataItem
 
