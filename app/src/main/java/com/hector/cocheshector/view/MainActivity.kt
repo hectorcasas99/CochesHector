@@ -44,8 +44,6 @@ class MainActivity : AppCompatActivity() {
         emailCurrent = (mAuth.currentUser!!.email).toString()
         val idPreference = getSharedPreferences("datos", Context.MODE_PRIVATE)
 
-
-
         initRV()
         setListener()
         if(iduser!=null){
@@ -54,7 +52,6 @@ class MainActivity : AppCompatActivity() {
             idpref.putString("iduser", "${iduser}")
             idpref.commit()
         }
-
 
         fab.setOnClickListener { view ->
             val userid = idPreference.getString("iduser", "null")

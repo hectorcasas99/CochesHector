@@ -49,14 +49,14 @@ class InfoVehiculoActivity : AppCompatActivity() {
                 .addOnSuccessListener { document ->
                     if(document.exists()){
                         //traemos datos
-                        email = document.getString("email")
+                        //email = document.getString("email")
+                        email = (document.data?.get("email")).toString()
+                        tvemail1.text = email
                         Log.d(TAG, "el propietario es:  ${email}")
                     } else {
                         Log.d(TAG, "no existe")
                     }
                 }
-
-
     }
 
 
@@ -88,7 +88,7 @@ class InfoVehiculoActivity : AppCompatActivity() {
 
         // DATOS USE
 
-        tvemail1.text = email
+
 
     }
 }
