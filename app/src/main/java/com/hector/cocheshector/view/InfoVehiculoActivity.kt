@@ -27,6 +27,8 @@ class InfoVehiculoActivity : AppCompatActivity() {
     val dec = DecimalFormat("###,###,###")
 
     var email: String? =""
+    var nick: String? =""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,10 +50,10 @@ class InfoVehiculoActivity : AppCompatActivity() {
             db.collection("usuarios").document("${vehiculo.iduser}").get()
                 .addOnSuccessListener { document ->
                     if(document.exists()){
-                        //traemos datos
-                        //email = document.getString("email")
                         email = (document.data?.get("email")).toString()
+                        nick = (document.data?.get("nick")).toString()
                         tvemail1.text = email
+                        tvnick1.text = nick
                         Log.d(TAG, "el propietario es:  ${email}")
                     } else {
                         Log.d(TAG, "no existe")
