@@ -37,9 +37,6 @@ class AddCarroActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
 
         userid = (intent.getSerializableExtra("userid") as? String).toString()
 
-        toast("$userid")
-
-
         db = FirebaseFirestore.getInstance()
         btnAddFoto.setOnClickListener{ addFotos() }
         btnRegistrarVehiculo.setOnClickListener { registrarVehiculo() }

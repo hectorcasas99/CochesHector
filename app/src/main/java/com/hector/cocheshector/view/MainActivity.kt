@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.hector.cocheshector.R
 import com.hector.cocheshector.adapter.CustomAdapter
 import com.hector.cocheshector.model.Vehiculo
@@ -133,7 +134,7 @@ class MainActivity : AppCompatActivity() {
 
         return super.onOptionsItemSelected(item)
     }
-    private fun salir(){
+    private fun salir() {
         mAuth.signOut()
         startActivity(Intent(this, LoginActivity::class.java))
         finish()

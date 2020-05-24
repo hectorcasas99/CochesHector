@@ -374,7 +374,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="15dp"
-                        android:text="hola"
                         android:textColor="@color/colorNegro"
                         android:textSize="20sp" />
                 </LinearLayout>
@@ -396,7 +395,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="15dp"
-                        android:text="cool@gmail.com"
                         android:textColor="@color/colorNegro"
                         android:textSize="20sp" />
                 </LinearLayout>
