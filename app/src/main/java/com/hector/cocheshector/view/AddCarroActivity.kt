@@ -61,8 +61,6 @@ class AddCarroActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
 
 
     private fun addFotos() {
-        Log.d(TAG, "hola soy tu foto")
-
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
         startActivityForResult(intent,0)
